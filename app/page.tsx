@@ -17,7 +17,7 @@ export default function Home() {
   );
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  
+
   const handleImageUpload = async () => {
     if (!selectedFile) {
       toast({
@@ -27,36 +27,36 @@ export default function Home() {
       console.error("No file selected.");
       return;
     }
-    
+
     setLoading(true);
     const formData = new FormData();
     formData.append("image", selectedFile);
 
     try {
-      console.log(process.env.NEXT_PUBLIC_REACT_APP_BACKEND_URL)
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_REACT_APP_BACKEND_URL || '',
-        formData,
+      console.log(process.env.NEXT_PUBLIC_REACT_APP_BACKEND_URL);
+      const response: any = await fetch(
+        process.env.NEXT_PUBLIC_REACT_APP_BACKEND_URL || "",
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          method: "POST",
+          body: formData,
+          mode: "no-cors",
         }
       );
+      console.log({ response });
       setLoading(false);
       setCaption(response.data.caption);
     } catch (error) {
       setLoading(false);
       toast({
-        variant: 'destructive',
-        description: 'Network Error'
-      })
+        variant: "destructive",
+        description: "Network Error",
+      });
       console.error("Error uploading image:", error);
     }
   };
 
   const handleFileChange = (event: any) => {
-    setCaption('')
+    setCaption("");
     const file = event.target.files?.[0];
     setSelectedFile(file || null);
 
