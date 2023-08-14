@@ -43,7 +43,7 @@ export default function Home() {
       const res = await response.json()
       console.log({ res });
       setLoading(false);
-      setCaption(res.data.caption);
+      setCaption(res.caption);
     } catch (error) {
       setLoading(false);
       toast({
