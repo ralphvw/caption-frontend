@@ -40,7 +40,7 @@ export default function Home() {
           body: formData,
         }
       );
-      const res = response.json()
+      const res = await response.json()
       console.log({ res });
       setLoading(false);
       setCaption(res.data.caption);
