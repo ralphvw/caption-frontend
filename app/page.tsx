@@ -33,13 +33,11 @@ export default function Home() {
     formData.append("image", selectedFile);
 
     try {
-      console.log(process.env.NEXT_PUBLIC_REACT_APP_BACKEND_URL);
       const response: any = await fetch(
         process.env.NEXT_PUBLIC_REACT_APP_BACKEND_URL || "",
         {
           method: "POST",
           body: formData,
-          mode: "no-cors",
         }
       );
       console.log({ response });
