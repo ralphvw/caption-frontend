@@ -40,9 +40,10 @@ export default function Home() {
           body: formData,
         }
       );
-      console.log({ response });
+      const res = response.json()
+      console.log({ res });
       setLoading(false);
-      setCaption(response.data.caption);
+      setCaption(res.data.caption);
     } catch (error) {
       setLoading(false);
       toast({
